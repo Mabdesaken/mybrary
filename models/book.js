@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 
+//Creating a cover variable for multer-framework
+const coverImageBasePath = 'uploads/bookCovers'
+
 const bookSchema = mongoose.Schema({
     title: {
         type: String,
@@ -34,3 +37,4 @@ const bookSchema = mongoose.Schema({
 })
 
 module.exports = mongoose.model('Book', bookSchema)
+module.exports.coverImageBasePath = coverImageBasePath

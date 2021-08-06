@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Author = require('../models/author')
 
+
 //All authors route
 router.get('/', async (req, res) => {
     let searchOptions = {}
@@ -25,13 +26,13 @@ router.get('/new', (req, res) => {
     res.render('authors/new', { author: new Author() })
 })
 
-//Create AUthor route
+//Create Author route
 router.post('/', async (req, res) => {
-    let author = new Author({
+    const author = new Author({
         name: req.body.name
     })
     try {
-        let newAuthor = await author.save()
+        const newAuthor = await author.save()
         // res.redirect(`authors/${newAuthor.id}`)
         res.redirect(`authors`)
     } catch {
