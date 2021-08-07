@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const path = require('path')
 //Creating a cover variable for multer-framework
 const coverImageBasePath = 'uploads/bookCovers'
 
@@ -24,7 +24,7 @@ const bookSchema = mongoose.Schema({
         required: true,
         default: Date.now()
     },
-    coverImage: {
+    coverImageName: {
         type: String,
         required: true
     },
@@ -34,6 +34,12 @@ const bookSchema = mongoose.Schema({
         ref: 'Author'
     }
 
+})
+
+bookSchema.virtual('coverImagePath').get(function() {
+    if(this.coverImageName != null) {
+        return path.join('/', coverImageBasePath, this.coverImageName)
+    }
 })
 
 module.exports = mongoose.model('Book', bookSchema)
